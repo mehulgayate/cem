@@ -28,7 +28,7 @@
 </bean>
  
     <context:component-scan
-        base-package="com.evalua.web" />
+        base-package="com.cem.web" />
          
     <bean id="viewResolver"
         class="org.springframework.web.servlet.view.UrlBasedViewResolver">
