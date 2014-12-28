@@ -14,5 +14,11 @@ public class MainController {
 		
 		return new ModelAndView("index");
 	}
+	
+	@RequestMapping("/login")
+	public ModelAndView showLogin(HttpServletRequest request){
+		
+		return new ModelAndView("login");
+	}
 
 }
