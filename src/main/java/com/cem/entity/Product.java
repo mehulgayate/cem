@@ -1,5 +1,6 @@
 package com.cem.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,8 @@ public class Product extends EntityBase{
 
 	private String name;
 	private String description;
-	private List<Department> departments;
+	private List<Department> departments=new ArrayList<Department>(0);
+	private List<Product> comparables=new ArrayList<Product>(0);
 	
 	public String getName() {
 		return name;
@@ -30,10 +32,39 @@ public class Product extends EntityBase{
 	public void setDepartments(List<Department> departments) {
 		this.departments = departments;
 	}
+	
+	public void addDepartment(Department department){
+		for (Department department2 : this.departments) {
+			if(department.getName().equals(department2.getName())){
+				return;
+			}
+		}
+		this.departments.add(department);
+	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@ManyToMany(cascade = { CascadeType.ALL}, fetch = FetchType.LAZY)
+	public List<Product> getComparables() {
+		return comparables;
+	}
+	public void setComparables(List<Product> comparables) {
+		this.comparables = comparables;
 	}	
+	
+	public void addComparableProduct(Product product){
+		for (Product comparable : this.comparables) {
+			if(comparable.getId().equals(product.getId())){
+				return;
+			}
+		}
+		
+		this.comparables.add(product);
+	}
+	
+	
 }

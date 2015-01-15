@@ -75,5 +75,12 @@
 	<bean id="multipartResolver"
                 class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	<bean id="repository"
-                class="com.cem.entity.support.Repository" />
+		class="com.cem.entity.support.Repository">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
+	<bean id="questionService"
+                class="com.cem.web.support.QuestionService" >
+		<property name="repository" ref="repository" />
+		<property name="dataStoreManager" ref="dataStoreManager" />
+		</bean>
 </beans>

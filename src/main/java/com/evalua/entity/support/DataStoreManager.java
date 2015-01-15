@@ -2,7 +2,9 @@ package com.evalua.entity.support;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class DataStoreManager {
 
 	private SessionFactory sessionFactory;	
@@ -11,14 +13,16 @@ public class DataStoreManager {
 		this.sessionFactory = sessionFactory;
 	}
 
-	public Session save(EntityBase entity){		
-		Session session=getSession();
+	public void save(EntityBase entity){		
+		Session session=sessionFactory.getCurrentSession();
 		session.saveOrUpdate(entity);
-		return session;
+		session.flush();
 	}
-
-	private Session getSession(){
-		return sessionFactory.openSession();
+	
+	public void delete(EntityBase entity){		
+		Session session=sessionFactory.getCurrentSession();
+		session.delete(entity);
+		session.flush();
 	}
 
 }

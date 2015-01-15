@@ -1,8 +1,16 @@
 package com.cem.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.evalua.entity.support.EntityBase;
 
@@ -10,7 +18,9 @@ import com.evalua.entity.support.EntityBase;
 public class Question extends EntityBase{
 
 	private String question;	
-	private List<String> comparator;
+	private User user;
+	private List<String> comparators=new ArrayList<String>(0);
+	
 	
 	public String getQuestion() {
 		return question;
@@ -18,11 +28,31 @@ public class Question extends EntityBase{
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-	public List<String> getComparator() {
-		return comparator;
+	
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	public User getUser() {
+		return user;
 	}
-	public void setComparator(List<String> comparator) {
-		this.comparator = comparator;
+	public void setUser(User user) {
+		this.user = user;
 	}
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	public List<String> getComparators() {
+		return comparators;
+	}
+	public void setComparators(List<String> comparators) {
+		this.comparators = comparators;
+	}
+	
+	public void addComparator(String comparator){
+		if(!this.comparators.contains(comparator)){
+			this.comparators.add(comparator);
+		}
+	}
+	
+	
+	
+	
 	
 }
