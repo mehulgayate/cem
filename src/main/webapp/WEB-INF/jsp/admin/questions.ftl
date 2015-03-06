@@ -296,7 +296,7 @@
                             <div class="box box-primary">
                                 <div class="box-header">
                                     <i class="ion ion-clipboard"></i>
-                                    <h3 class="box-title">Questions List</h3>
+                                    <h3 class="box-title">ALL Questions List</h3>
                                     <div class="box-tools pull-right">                                        
                                     </div>
                                 </div><!-- /.box-header -->
@@ -311,9 +311,9 @@
                                             </span>                                                                                   
                                             <!-- todo text -->
                                             <span class="text">${question.id}</span>
-                                            <span class="text" style="margin-left: 20px;">${question.name}</span>
+                                            <span class="text" style="margin-left: 20px;">${question.question}</span>
                                             <#list question.comparators as comparator>
-                                            <span class="text" style="margin-left: 20px;">${coparator},</span>
+                                            <span class="text" style="margin-left: 20px;">${comparator},</span>
                                             	 
                                             </#list>                                                                                        
                                             <!-- General tools such as edit or delete-->
@@ -331,8 +331,41 @@
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
                         <section class="col-lg-6 connectedSortable">
-                            <!-- TO DO List -->
-                            
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <i class="ion ion-clipboard"></i>
+                                    <h3 class="box-title">No Comparators / Product Found Questions List</h3>
+                                    <div class="box-tools pull-right">                                        
+                                    </div>
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+                                    <ul class="todo-list">
+                                      <#list questions as question>
+                                      	<#if question.productFound == 0>
+                                        <li>
+                                            <!-- drag handle -->
+                                            <span class="handle">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </span>                                                                                   
+                                            <!-- todo text -->
+                                            <span class="text">${question.id}</span>
+                                            <span class="text" style="margin-left: 20px;">${question.question}</span>
+                                            <#list question.comparators as comparator>
+                                            <span class="text" style="margin-left: 20px;">${comparator},</span>
+                                            	 
+                                            </#list>                                                                                        
+                                            <!-- General tools such as edit or delete-->
+                                            <div class="tools">                                                
+                                                <a href="/admin/delete-question?id=${question.id}"><i class="fa fa-trash-o"></i></a>
+                                            </div>
+                                        </li>     
+                                        </#if>
+                                        </#list>                                  
+                                    </ul>
+                                </div><!-- /.box-body -->
+                                
+                            </div><!-- /.box -->
 
                         </section><!-- right col -->
                     </div><!-- /.row (main row) -->

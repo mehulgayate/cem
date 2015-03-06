@@ -20,8 +20,15 @@ public class Question extends EntityBase{
 	private String question;	
 	private User user;
 	private List<String> comparators=new ArrayList<String>(0);
+	private Integer productFound=0;	
 	
 	
+	public Integer getProductFound() {
+		return productFound;
+	}
+	public void setProductFound(Integer productFound) {
+		this.productFound = productFound;
+	}
 	public String getQuestion() {
 		return question;
 	}

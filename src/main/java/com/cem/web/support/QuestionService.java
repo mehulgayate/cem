@@ -28,6 +28,7 @@ public class QuestionService {
 		while (matcher.find()) {
 			question.addComparator(matcher.group(1));
 		}
+		int productFound=0;
 
 		if(question.getComparators().size()>1){
 			for (String comparatorString : question.getComparators()) {
@@ -39,16 +40,17 @@ public class QuestionService {
 								Product comparableProduct=repository.findProductByName(comparatorStringInner);
 							
 								if(comparableProduct!=null){
+									productFound++;
 									System.out.println("**** Found Comparable  "+comparableProduct.getName());
 									product.addComparableProduct(comparableProduct);
 								}
 							}
-						}
-						
+						}										
 						dataStoreManager.save(product);
 					}
 			}
 		}
+		question.setProductFound(productFound);		
 	}
 
 }

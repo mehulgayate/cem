@@ -25,11 +25,13 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 import com.cem.entity.Department;
 import com.cem.entity.Product;
+import com.cem.entity.Question;
 import com.cem.entity.User;
 import com.cem.entity.support.CSVProduct;
 import com.cem.entity.support.FileUploadForm;
 import com.cem.entity.support.FileUploadForm.Type;
 import com.cem.entity.support.Repository;
+import com.cem.web.support.QuestionService;
 import com.evalua.entity.support.DataStoreManager;
 
 
@@ -44,6 +46,9 @@ public class AdminController {
 
 	@Autowired
 	ServletContext servletContext;
+	
+	@Resource
+	private QuestionService questionService;
 
 
 	@RequestMapping("/admin")
@@ -244,6 +249,13 @@ public class AdminController {
 		}catch(Exception exception){
 			exception.printStackTrace();
 		}
+		List<Question> questions = repository.listAllQuestions();
+		for (Question question2 : questions) {
+			questionService.processQuestion(question2);
+			System.out.println("Product found in controller ++++++++++++++++============="+question2.getProductFound());
+			dataStoreManager.save(question2);
+		}
+		
 		return new ModelAndView("redirect:/admin");
 	}
 
