@@ -118,6 +118,9 @@ body{
 	padding: 6px;
 	margin-top: 10px;
 }
+.errorClass{
+	display: none;
+}
 
 .login input[type=submit]:hover,  .login input[type=button]:hover{
 	opacity: 0.8;
@@ -149,8 +152,25 @@ body{
    color: rgba(255,255,255,0.6);
 }
 </style>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="/static/login/js/prefixfree.min.js"></script>
+    
+    <script type="text/javascript">
+$(function() {
+$("#loginButton").click(function(){
+	$(".errorClass").hide();
+	if($("#email").val()==""){
+		$("#emailError").show();
+	}else if($("#password").val()==""){
+		$("#passwordError").show();
+	}else{
+		$("#loginForm").submit();
+	}
+	
+});
+});
+
+</script>
 
 </head>
 
@@ -159,14 +179,14 @@ body{
   <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-			<div>Filtered<span>Wall</span></div>
+			<div>Secure<span>KNN</span></div>
 		</div>
 		<br>
-		<form action="/authenticate" method="post">
+		<form action="/authenticate" method="post" id="loginForm">
 			<div class="login">
-					<input type="text" placeholder="email" name="email"><br>
-					<input type="password" placeholder="password" name="password"><br>
-					<input type="submit" value="Login"><br>
+					<input type="text" placeholder="email" name="email" id="email"><br><span class="errorClass" style="color: red" id="emailError">Email cannot be blank</span>
+					<input type="password" placeholder="password" name="password" id="password"><br><span class="errorClass" style="color: red" id="passwordError">Password cannot be blank</span>
+					<input type="button" value="Login" id="loginButton"><br>
 					<input type="button" value="Signup" id="signUpButton">
 			</div>
 		</form>

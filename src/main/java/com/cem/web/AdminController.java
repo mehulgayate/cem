@@ -169,13 +169,12 @@ public class AdminController {
 	@RequestMapping("/admin/upload-bulk")
 	public ModelAndView bulkUpload(@ModelAttribute(FileUploadForm.key) FileUploadForm fileUploadForm) throws IOException{	
 
+		CSVReader reader =null;
 
 		try {
 
 			File csvFile = new File(servletContext.getRealPath("WEB-INF/classes/csv/temp.csv"));
-			if(csvFile.exists()){
-				csvFile.delete();
-			}
+		
 
 			System.out.println("***** Creating file at "+servletContext.getRealPath("WEB-INF/classes/csv/temp.csv"));
 			new File(servletContext.getRealPath("WEB-INF/classes/csv/")).mkdirs();
@@ -207,7 +206,8 @@ public class AdminController {
 
 			URL url = AdminController.class.getResource("/csv/temp.csv");
 
-			CSVReader reader = new CSVReader(new FileReader(url.getFile()));
+			reader = new CSVReader(new FileReader(url.getFile()));
+			
 
 			if(fileUploadForm.getType().equals(Type.DEPARTMENT)){
 				List<Department> list = csv.parse(strat, reader);
@@ -248,6 +248,10 @@ public class AdminController {
 
 		}catch(Exception exception){
 			exception.printStackTrace();
+		}finally{
+			if(reader!=null){
+				reader.close();
+			}
 		}
 		List<Question> questions = repository.listAllQuestions();
 		for (Question question2 : questions) {

@@ -76,6 +76,11 @@ public class QuestionController {
 		if(user==null){
 			return new ModelAndView("redirect:/login");
 		}		
+		
+		Question existedQuestion = repository.findQuestionByQuestionAndUser(question.getQuestion(),user);
+		if(existedQuestion!=null){
+			return new ModelAndView("redirect:/questions");
+		}
 
 		questionService.processQuestion(question);
 		question.setUser(user);		

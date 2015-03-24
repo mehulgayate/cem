@@ -2,7 +2,7 @@
 <html>
 
 <head>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <meta charset="UTF-8">
 
   <title>Sign in</title>
@@ -105,7 +105,7 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=submit]{
+#signUpButton{
 	width: 260px;
 	height: 35px;
 	background: #fff;
@@ -149,28 +149,50 @@ body{
 ::-moz-input-placeholder{
    color: rgba(255,255,255,0.6);
 }
+
+.errorClass{
+	display: none;
+}
 </style>
 
     <script src="/static/login/js/prefixfree.min.js"></script>
 
 </head>
+<script type="text/javascript">
+$(function() {
+$("#signUpButton").click(function(){
+	$(".errorClass").hide();
+	if($("#name").val()==""){
+		$("#nameError").show();
+	}else if($("#email").val()==""){
+		$("#emailError").show();
+	}else if($("#password").val()==""){
+		$("#passwordError").show();
+	}else{
+		$("#signUpForm").submit();
+	}
+	
+});
+});
+
+</script>
 
 <body>
 
   <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-			<div>Filtered<span>Wall</span></div>
+			<div>Secure<span>KNN</span></div>
 		</div>
 		<br>
-		<form action="/add-user" method="post">
+		<form action="/add-user" method="post" id="signUpForm">
 			<div class="login">
-					<input type="text" placeholder="Name" name="name"><br>
-					<input type="text" placeholder="Email" name="email"><br>
-					<input type="password" placeholder="Password" name="password"><br>
-					<input type="text" placeholder="Address" name="address"><br>
-					<input type="text" placeholder="Phone" name="phone"><br>
-					<input type="submit" value="SignUp"><br>
+					<input type="text" placeholder="Name" name="name" id="name"><br><span class="errorClass" style="color: red" id="nameError">Name cannot be blank</span>
+					<input type="text" placeholder="Email" name="email" id="email"><br><span class="errorClass" style="color: red" id="emailError">Email cannot be blank</span>
+					<input type="password" placeholder="Password" name="password" id="password"><br><span class="errorClass" style="color: red" id="passwordError">Password cannot be blank</span>
+					<input type="text" placeholder="Address" name="address" id="address"><br><span class="errorClass" style="color: red"></span>
+					<input type="text" placeholder="Phone" name="phone" id="phone"><br><span class="errorClass" style="color: red"></span>
+					<input type="button" value="SignUp" id="signUpButton"><br>
 					
 			</div>
 		</form>
