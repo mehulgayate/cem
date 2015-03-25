@@ -56,6 +56,12 @@ public class Repository {
 				.uniqueResult();
 	}	
 	
+	public List<Question> listQuestionByQuestionAndUser(String question){
+		return getSession().createQuery("FROM "+Question.class.getName()+" where question LIKE :question")
+				.setParameter("question", "%"+question+"%")				
+				.list();
+	}	
+	
 	public Department findDepartmentByName(String name){
 		return (Department) getSession().createQuery("FROM "+Department.class.getName()+" where name=:name")
 				.setParameter("name", name)

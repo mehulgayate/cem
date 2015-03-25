@@ -89,7 +89,11 @@ Released   : 20140101
 			</#list>	
 			<#elseif products?has_content && products?size ==0 >
 				<strong style="color: white;">No Results Found</strong>
-			</#if>		
+			</#if>			
+			
+			<#if searched?has_content && products?size ==0>
+				<strong style="color: white;">No Product Found</strong>
+			</#if>	
 		</div>
 	</div>
 </div>
@@ -106,4 +110,7 @@ Released   : 20140101
 	
 </div>
 </body>
+<script type="text/javascript">
+
+</script>
 </html>

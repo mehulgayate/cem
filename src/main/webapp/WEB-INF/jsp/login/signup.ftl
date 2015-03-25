@@ -50,7 +50,7 @@ body{
 
 .header{
 	position: absolute;
-	top: calc(50% - 35px);
+	top: calc(30% - 35px);
 	left: calc(50% - 255px);
 	z-index: 2;
 }
@@ -182,7 +182,7 @@ $("#signUpButton").click(function(){
   <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-			<div>Secure<span>KNN</span></div>
+			<div>Comparable Entity<span>Mining</span></div>
 		</div>
 		<br>
 		<form action="/add-user" method="post" id="signUpForm">

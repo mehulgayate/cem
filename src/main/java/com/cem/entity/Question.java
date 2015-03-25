@@ -21,8 +21,15 @@ public class Question extends EntityBase{
 	private User user;
 	private List<String> comparators=new ArrayList<String>(0);
 	private Integer productFound=0;	
+	private Long questionHit=1L;
 	
 	
+	public Long getQuestionHit() {
+		return questionHit;
+	}
+	public void setQuestionHit(Long questionHit) {
+		this.questionHit = questionHit;
+	}
 	public Integer getProductFound() {
 		return productFound;
 	}

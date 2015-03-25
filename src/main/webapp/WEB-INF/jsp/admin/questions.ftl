@@ -311,7 +311,8 @@
                                             </span>                                                                                   
                                             <!-- todo text -->
                                             <span class="text">${question.id}</span>
-                                            <span class="text" style="margin-left: 20px;">${question.question}</span>
+                                            <span class="text" style="margin-left: 20px;">Hits : ${question.questionHit?if_exists}</span>
+                                            <span class="text" style="margin-left: 20px;">${question.question}</span>                                            
                                             <#list question.comparators as comparator>
                                             <span class="text" style="margin-left: 20px;">${comparator},</span>
                                             	 

@@ -54,7 +54,7 @@ public class AdminController {
 	@RequestMapping("/admin")
 	public ModelAndView login(HttpSession httpSession){
 		ModelAndView mv=new ModelAndView("admin/index");
-		String user=(String) httpSession.getAttribute("user");
+		String user=(String) httpSession.getAttribute("adminUser");
 		if(user ==null || !user.equals("admin")){
 			return new ModelAndView("redirect:/admin/login");
 		}
@@ -153,7 +153,7 @@ public class AdminController {
 	@RequestMapping("/admin/authenticate")	
 	public ModelAndView authenticate(@RequestParam String email, @RequestParam String password, HttpSession session){	
 		if(email.equals("admin") && password.equals("1234")){
-			session.setAttribute("user", "admin");
+			session.setAttribute("adminUser", "admin");
 			return new ModelAndView("redirect:/admin/");	
 		}
 		return new ModelAndView("redirect:/admin/login");

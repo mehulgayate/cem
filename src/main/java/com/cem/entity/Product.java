@@ -17,6 +17,7 @@ public class Product extends EntityBase{
 	private String description;
 	private List<Department> departments=new ArrayList<Department>(0);
 	private List<Product> comparables=new ArrayList<Product>(0);
+	private Long searchCount= 0L;
 	
 	public String getName() {
 		return name;
@@ -65,6 +66,10 @@ public class Product extends EntityBase{
 		
 		this.comparables.add(product);
 	}
-	
-	
+	public Long getSearchCount() {
+		return searchCount;
+	}
+	public void setSearchCount(Long searchCount) {
+		this.searchCount = searchCount;
+	}
 }

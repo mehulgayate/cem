@@ -119,6 +119,10 @@ body{
 	margin-top: 10px;
 }
 
+.errorClass{
+	display: none;
+}
+
 .login input[type=submit]:hover,  .login input[type=button]:hover{
 	opacity: 0.8;
 }
@@ -159,14 +163,15 @@ body{
   <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-			<div>Filtered<span>Wall</span></div>
+			<div>Admin<span>Login</span></div>
 		</div>
 		<br>
-		<form action="/admin/authenticate" method="post">
+		<form action="/admin/authenticate" method="post" id="loginForm">
 			<div class="login">
-					<input type="text" placeholder="email" name="email"><br>
-					<input type="password" placeholder="password" name="password"><br>
-					<input type="submit" value="Login"><br>					
+					<input type="text" placeholder="email" name="email" id="email"><br><span class="errorClass" style="color: red" id="emailError">Email cannot be blank</span>
+					<input type="password" placeholder="password" name="password" id="password"><br><span class="errorClass" style="color: red" id="passwordError">Password cannot be blank</span>
+					<input type="button" value="Login" id="loginButton"><br>
+					<input type="button" value="Signup" id="signUpButton">
 			</div>
 		</form>
 
@@ -176,7 +181,22 @@ body{
   		location.href="/signup";
   	});
   </script>
+    <script type="text/javascript">
+$(function() {
+$("#loginButton").click(function(){
+	$(".errorClass").hide();
+	if($("#email").val()==""){
+		$("#emailError").show();
+	}else if($("#password").val()==""){
+		$("#passwordError").show();
+	}else{
+		$("#loginForm").submit();
+	}
+	
+});
+});
 
+</script>
 </body>
 
 </html>

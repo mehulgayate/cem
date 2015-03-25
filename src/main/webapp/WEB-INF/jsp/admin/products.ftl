@@ -311,8 +311,9 @@
                                             </span>                                                                                   
                                             <!-- todo text -->
                                             <span class="text">${product.id}</span>
+                                            <span class="text" style="margin-left: 20px;">SearchCount : ${product.searchCount?if_exists}</span>
                                             <span class="text" style="margin-left: 20px;">${product.name}</span>
-                                            <span class="text" style="margin-left: 20px;">${product.description}</span>
+                                            <span class="text" style="margin-left: 20px;">${product.description}</span>                                            
                                             <#if product.departments?has_content><span class="text" style="margin-left: 20px;">
                                             <#list product.departments as department>
                                             ${department.name} 

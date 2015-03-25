@@ -55,7 +55,18 @@ public class QuestionController {
 		
 		if(StringUtils.isNotBlank(query)){
 			List<Product> products=repository.listProductByName(query);
+			
+			for (Product product : products) {
+				product.setSearchCount(product.getSearchCount()+1);
+				dataStoreManager.save(product);
+				for (Product product2 : product.getComparables()) {
+					product2.setSearchCount(product2.getSearchCount()+1);
+					dataStoreManager.save(product2);
+				}
+			}
+			
 			mv.addObject("products", products);
+			mv.addObject("searched", true);
 		}
 		
 		return mv;
@@ -81,7 +92,16 @@ public class QuestionController {
 		if(existedQuestion!=null){
 			return new ModelAndView("redirect:/questions");
 		}
-
+		
+		long questionHit = 1; 
+		List<Question> questions = repository.listQuestionByQuestionAndUser(question.getQuestion());
+		for (Question question2 : questions) {
+			question2.setQuestionHit(question2.getQuestionHit()+1);
+			questionHit = question2.getQuestionHit();
+			dataStoreManager.save(question2);
+			
+		}
+		question.setQuestionHit(questionHit);
 		questionService.processQuestion(question);
 		question.setUser(user);		
 		dataStoreManager.save(question);
