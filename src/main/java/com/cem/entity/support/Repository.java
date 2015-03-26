@@ -13,6 +13,7 @@ import com.cem.entity.Department;
 import com.cem.entity.GraphData;
 import com.cem.entity.Product;
 import com.cem.entity.Question;
+import com.cem.entity.Question.Status;
 import com.cem.entity.User;
 
 
@@ -116,8 +117,9 @@ public class Repository {
 	}
 
 	public List<Question> listQuestionsByUser(User user){
-		return getSession().createQuery("FROM "+Question.class.getName()+" p where p.user=:user")
+		return getSession().createQuery("FROM "+Question.class.getName()+" p where p.user=:user AND status!=:status")
 				.setParameter("user", user)				
+				.setParameter("status", Status.DELETED)
 				.list();
 	}
 	

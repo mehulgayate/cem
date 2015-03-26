@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cem.entity.Product;
 import com.cem.entity.Question;
+import com.cem.entity.Question.Status;
 import com.cem.entity.User;
 import com.cem.entity.support.Repository;
 import com.cem.web.support.QuestionService;
@@ -39,12 +40,12 @@ public class QuestionController {
 		if(user==null){
 			return new ModelAndView("redirect:/login");
 		}
-		
-		
+
+
 		List<Question> questions=repository.listQuestionsByUser(user);
 		return new ModelAndView("user/questions").addObject("questions",questions);
 	}
-	
+
 	@RequestMapping("/search")
 	public ModelAndView search(HttpSession session, @RequestParam(required = false) String query){
 		User user=(User) session.getAttribute("user");
@@ -52,10 +53,10 @@ public class QuestionController {
 		if(user==null){
 			return new ModelAndView("redirect:/login");
 		}
-		
+
 		if(StringUtils.isNotBlank(query)){
 			List<Product> products=repository.listProductByName(query);
-			
+
 			for (Product product : products) {
 				product.setSearchCount(product.getSearchCount()+1);
 				dataStoreManager.save(product);
@@ -64,15 +65,15 @@ public class QuestionController {
 					dataStoreManager.save(product2);
 				}
 			}
-			
+
 			mv.addObject("products", products);
 			mv.addObject("searched", true);
 		}
-		
+
 		return mv;
 	}
-	
-	
+
+
 
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpSession session){	
@@ -87,25 +88,28 @@ public class QuestionController {
 		if(user==null){
 			return new ModelAndView("redirect:/login");
 		}		
-		
+
 		Question existedQuestion = repository.findQuestionByQuestionAndUser(question.getQuestion(),user);
 		if(existedQuestion!=null){
 			return new ModelAndView("redirect:/questions");
 		}
-		
+
 		long questionHit = 1; 
 		List<Question> questions = repository.listQuestionByQuestionAndUser(question.getQuestion());
 		for (Question question2 : questions) {
 			question2.setQuestionHit(question2.getQuestionHit()+1);
 			questionHit = question2.getQuestionHit();
 			dataStoreManager.save(question2);
-			
+
 		}
 		question.setQuestionHit(questionHit);
 		questionService.processQuestion(question);
-		question.setUser(user);		
-		dataStoreManager.save(question);
-		
+
+		if(question.getStatus()!=null && question.getStatus()==Status.ACTIVE){
+			question.setUser(user);		
+			dataStoreManager.save(question);
+		}
+
 		return new ModelAndView("redirect:/questions");
 
 	}	

@@ -1,10 +1,14 @@
 package com.cem.web.support;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.cem.entity.Department;
 import com.cem.entity.Product;
 import com.cem.entity.Question;
+import com.cem.entity.Question.Status;
 import com.cem.entity.support.Repository;
 import com.evalua.entity.support.DataStoreManager;
 
@@ -42,7 +46,27 @@ public class QuestionService {
 								if(comparableProduct!=null){
 									productFound++;
 									System.out.println("**** Found Comparable  "+comparableProduct.getName());
-									product.addComparableProduct(comparableProduct);
+									
+									List<String> depStrings=new ArrayList<String>();
+									for (Department dept : product.getDepartments()) {
+										depStrings.add(dept.getName());
+									}
+									
+									boolean foundDept =false;
+									for (Department department : comparableProduct.getDepartments()) {
+										System.out.println(depStrings+"   *** "+department.getName());
+										if(depStrings.contains(department.getName())){
+											product.addComparableProduct(comparableProduct);											
+											foundDept=true;
+											System.out.println("**** "+foundDept);
+											break;
+										}
+									}
+									
+									if(!foundDept){
+										question.setStatus(Status.DELETED);
+									}
+									
 								}
 							}
 						}										

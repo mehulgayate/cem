@@ -16,12 +16,17 @@ import com.evalua.entity.support.EntityBase;
 
 @Entity
 public class Question extends EntityBase{
+	
+	public enum Status {
+		ACTIVE,DELETED;
+	}
 
 	private String question;	
 	private User user;
 	private List<String> comparators=new ArrayList<String>(0);
 	private Integer productFound=0;	
 	private Long questionHit=1L;
+	private Status status=Status.ACTIVE;
 	
 	
 	public Long getQuestionHit() {
@@ -64,9 +69,11 @@ public class Question extends EntityBase{
 			this.comparators.add(comparator);
 		}
 	}
-	
-	
-	
-	
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}	
 	
 }
