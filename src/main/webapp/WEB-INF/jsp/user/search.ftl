@@ -19,6 +19,28 @@ Released   : 20140101
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link href="/static/user/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/static/user/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link type="text/css" rel="stylesheet" href="${ctx.contextPath}/static/css/magnific-popup.css" media="screen, projection" />
+<script type="text/javascript" src="/static/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.magnific-popup.min.js"></script>
+
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+<script type="text/javascript">
+$(function(){
+$('#addReviewLink').magnificPopup({
+	type:'inline',
+	midClick: true, // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+	callbacks: {
+        elementParse: function(item){
+          var id=$(item.el).data("id");
+          alert(id);
+          $("#productId").val(id);
+        }
+	}
+});	
+});
+
+</script>
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 
@@ -27,7 +49,7 @@ Released   : 20140101
 <div id="header-wrapper">
 	<div id="header" class="container">
 		<div id="logo">
-			<h1><a href="#">FilteredWall</a></h1>
+			<h1><a href="#">C Q Analyzer</a></h1>
 		</div>
 		<div id="menu">
 			<ul>
@@ -84,7 +106,24 @@ Released   : 20140101
 					  No Comparable products
 					</#if>
 					</div>
-				</div>												
+				</div>
+				<div>
+					<div>Reviews :</div>
+					<a href="#" class="addNewLink" data-mfp-src="#productReviewPopup" id="addReviewLink" style="float: right;" data-id="${product.id}">Add Review</a>
+					
+					<div>
+					<#if product.reviews?has_content>
+					<ul>
+					<#list product.reviews as review>						
+						<li type="square">${review?if_exists}</li>
+						<br/>
+					</#list>
+					</ul>
+					<#else>
+					  No Reviews Found
+					</#if>
+					</div>
+				</div>											
 			</div>
 			</#list>	
 			<#elseif products?has_content && products?size ==0 >
@@ -109,6 +148,8 @@ Released   : 20140101
 <div id="copyright" class="container">
 	
 </div>
+<#include "product-review-popup.ftl">
+
 </body>
 <script type="text/javascript">
 

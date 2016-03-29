@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.evalua.entity.support.EntityBase;
 
@@ -18,6 +22,7 @@ public class Product extends EntityBase{
 	private List<Department> departments=new ArrayList<Department>(0);
 	private List<Product> comparables=new ArrayList<Product>(0);
 	private Long searchCount= 0L;
+	private List<String> reviews;
 	
 	public String getName() {
 		return name;
@@ -72,4 +77,15 @@ public class Product extends EntityBase{
 	public void setSearchCount(Long searchCount) {
 		this.searchCount = searchCount;
 	}
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	public List<String> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<String> reviews) {
+		this.reviews = reviews;
+	}
+	
+	
 }

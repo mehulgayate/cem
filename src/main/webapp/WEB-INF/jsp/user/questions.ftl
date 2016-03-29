@@ -19,15 +19,12 @@ Released   : 20140101
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link href="/static/user/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/static/user/fonts.css" rel="stylesheet" type="text/css" media="all" />
-
-<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-
 </head>
 <body>
 <div id="header-wrapper">
 	<div id="header" class="container">
 		<div id="logo">
-			<h1><a href="#">FilteredWall</a></h1>
+			<h1><a href="#">C Q Analyzer</a></h1>
 		</div>
 		<div id="menu">
 			<ul>
@@ -51,6 +48,13 @@ Released   : 20140101
 					<#if question.comparators?has_content>
 						<#list question.comparators as comparator>
 						${comparator},
+						</#list>
+					</#if>
+				</div>
+				<div style="display: inline-block; width: 100px; border-left: 2px solid; padding-left	: 2px;">
+					<#if question.comparableProducts?has_content>
+						<#list question.comparableProducts as comparableProduct>
+						${comparableProduct.name!},
 						</#list>
 					</#if>
 				</div>

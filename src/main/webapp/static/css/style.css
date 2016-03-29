@@ -1,0 +1,166 @@
+.bodyContainer {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.allPageHeader {
+	background-image: url("../img/header-back.jpg");
+	height: 60px;
+	padding-left: 10px;
+	padding-top: 5px;
+}
+
+.headerText {
+	font-weight: bold;
+	color: #FFF;
+	margin-top: 19px;
+}
+
+.tableView{
+	display: table;
+	border-right: 1px solid;
+	border-top: 1px solid;;
+}
+.tableRow {
+	display: table-row;
+}
+
+.tableCell {
+	display: table-cell;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+	padding: 4px;
+	width: 60px;
+}
+
+.headerRow{
+	background-color: #CCC !important;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.actionCell{
+	width:60px;
+	text-align: center;
+}
+
+.actionCell a{
+	display: inline-block;
+}
+
+.tableRow:nth-child(odd) {
+	background: #E6E6FA;
+}
+
+.deleteIcon{
+	width: 26px;
+	height:22px;
+}
+.logoutIcon{
+	width: 90px;
+	height:40px;
+	float: left;
+}
+.buyIcon{
+	width: 60px;
+	height:70px;
+}
+.editIcon{
+	width: 26px;
+	height: 22px;	
+}
+.homeIcon{
+	width: 26px;
+	height:22px;
+}
+.popupContainer {
+	position: relative;
+	background: #FFF;
+	padding: 20px;
+	width: auto;
+	max-width: 500px;
+	margin: 20px auto;
+}
+.popupHeader{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+.popupFooter{
+	padding-top :8px;
+	height: 35px;
+	background: #C0C0C0;
+	margin-top: 20px;
+}
+.buttonClassOne{
+	min-width : 100px;
+	height: 30px;
+	background-color: white;
+	border: 1px solid;
+	float: right;
+	margin-right: 20px;
+	border-radius: 5px;
+}
+.tableLayout{
+	display: table;
+}
+
+.rowLayout{
+	display: table-row;
+}
+
+.cellLayout{
+	display:  table-cell;
+	padding: 4px;
+}
+.textInputOne{
+	width: 336px;
+	height: 20px;	
+}
+.bold{
+	font-weight: bold;
+}
+
+#productListTable {
+	width: 550px;
+}
+
+.tableheader {
+	font size: 16px;
+	font-weight: bold;
+	width: 550px;
+}
+.shareFileLink{
+	float: center;
+}
+.addNewProductLink{
+	float: right;
+}
+.addEditionLink{
+	float: right;
+}
+
+.logoutLink{
+	float: right;
+}
+
+.addFeedCell{
+	min-width: 115px;
+}
+
+#userDetailsTabel{
+	border: none;
+}
+
+#userDetailsTabel .tableCell{
+	border: none;
+}
+
+#userDetailsTabel .tableRow{
+	background-color: #FFF !important;
+	height: 50px;
+}
+
+#userDetailsTabel .head{
+	font-weight: bold;
+}

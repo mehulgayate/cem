@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Fetch;
@@ -27,7 +28,7 @@ public class Question extends EntityBase{
 	private Integer productFound=0;	
 	private Long questionHit=1L;
 	private Status status=Status.ACTIVE;
-	
+	private List<Product> comparableProducts =  new ArrayList<Product>();	
 	
 	public Long getQuestionHit() {
 		return questionHit;
@@ -74,6 +75,16 @@ public class Question extends EntityBase{
 	}
 	public void setStatus(Status status) {
 		this.status = status;
-	}	
+	}
+	
+	@ManyToMany(cascade = CascadeType.REFRESH)
+	public List<Product> getComparableProducts() {
+		return comparableProducts;
+	}
+	public void setComparableProducts(List<Product> comparableProducts) {
+		this.comparableProducts = comparableProducts;
+	}
+	
+	
 	
 }

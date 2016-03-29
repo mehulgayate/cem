@@ -1,5 +1,6 @@
 package com.cem.web;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -68,6 +69,7 @@ public class QuestionController {
 
 			mv.addObject("products", products);
 			mv.addObject("searched", true);
+			mv.addObject("query", query);
 		}
 
 		return mv;
@@ -112,6 +114,22 @@ public class QuestionController {
 
 		return new ModelAndView("redirect:/questions");
 
-	}	
+	}
+	
+	@RequestMapping("/product-review")
+	public ModelAndView productReview(HttpSession session,@RequestParam Long productId,@RequestParam String review, String searchString) throws IOException {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			return new ModelAndView("redirect:/login");
+		}
+		
+		Product product = repository.findProductById(productId);
+		if(StringUtils.isNotBlank(review)){
+			product.getReviews().add(review);
+			dataStoreManager.save(product);
+		}
+		
+		return new ModelAndView("redirect:/search?query="+searchString);
+	}
 
 }

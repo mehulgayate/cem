@@ -34,6 +34,7 @@ public class QuestionService {
 		}
 		int productFound=0;
 
+		List<Product> comparableProducts = question.getComparableProducts();
 		if(question.getComparators().size()>1){
 			for (String comparatorString : question.getComparators()) {
 					Product product=repository.findProductByName(comparatorString);					
@@ -59,6 +60,19 @@ public class QuestionService {
 											product.addComparableProduct(comparableProduct);											
 											foundDept=true;
 											System.out.println("**** "+foundDept);
+											
+											boolean proExists = false;
+											for (Product cProduct : comparableProducts) {
+												if(cProduct.getId().equals(product)){
+													proExists = true;
+													break;
+												}
+											}
+											
+											if(!proExists){
+												comparableProducts.add(product);
+											}
+											
 											break;
 										}
 									}
